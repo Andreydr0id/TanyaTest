@@ -60,21 +60,6 @@
             position: relative;
         }
 
-        /* Frayed Burlap Cloth Bottom Border Effect */
-        .fringe-border {
-            position: relative;
-        }
-        .fringe-border::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            right: 0;
-            height: 10px;
-            background-image: repeating-linear-gradient(90deg, #d3c0a2 0px, #bfa682 2px, transparent 2px, transparent 5px);
-            opacity: 0.8;
-        }
-
         /* Dark Vintage Wood Panel for Turntable */
         .dark-wood-base {
             background: linear-gradient(145deg, #4d331e, #2f1d0f);
@@ -130,10 +115,11 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform: rotate(var(--rotation, 0deg));
             border: 1px solid #e8dec8;
+            position: relative;
         }
 
         .polaroid:hover {
-            transform: scale(1.06) rotate(0deg) !important;
+            transform: scale(1.05) rotate(0deg) !important;
             z-index: 30;
             box-shadow: 0 16px 30px rgba(40, 20, 5, 0.4);
         }
@@ -194,7 +180,7 @@
                 </h1>
                 
                 <p class="font-garamond italic text-amber-950 text-base md:text-xl mt-2 max-w-xl mx-auto font-semibold">
-                    Давай выберем трек для воспоминаний
+                    Давай выберем трек и вспомним лучшие моменты
                 </p>
             </div>
         </header>
@@ -262,7 +248,7 @@
                                 </div>
                                 <div id="tonearm" class="tonearm absolute top-4 left-4 w-2 h-40 origin-top-left">
                                     <div class="w-1.5 h-36 bg-gradient-to-r from-gray-300 via-gray-100 to-gray-400 mx-auto shadow-md"></div>
-                                    <!-- Cartridge Head resting on outer edge when active -->
+                                    <!-- Cartridge Head -->
                                     <div class="w-4 h-7 bg-neutral-800 rounded-sm ml-[-5px] mt-[-2px] border border-amber-500/50 shadow-md flex items-center justify-center">
                                         <div class="w-1 h-2 bg-amber-400/80 rounded-full"></div>
                                     </div>
@@ -292,10 +278,10 @@
                         Коллекция Пластинок
                     </h3>
                     <p class="text-xs text-amber-950/80 font-semibold">
-                        Нажмите на любую обложку: она увеличится, установится на проигрыватель и начнется воспроизведение!
+                        Нажмите на любую обложку: она установится на проигрыватель и начнется воспроизведение!
                     </p>
 
-                    <!-- Albums Grid with larger artwork -->
+                    <!-- Albums Grid -->
                     <div id="albums-container" class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-2">
                         <!-- Dynamic vinyl cards -->
                     </div>
@@ -305,73 +291,27 @@
             </div>
         </section>
 
-        <!-- POLAROID PHOTO GALLERY SECTION -->
+        <!-- EDITABLE POLAROID PHOTO GALLERY SECTION -->
         <section class="linen-panel p-6 md:p-10">
-            <div class="flex flex-col sm:flex-row items-center justify-between border-b-2 border-amber-800/30 pb-4 mb-8 gap-2">
+            <div class="flex flex-col sm:flex-row items-center justify-between border-b-2 border-amber-800/30 pb-4 mb-8 gap-4">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-camera-retro text-amber-900 text-3xl"></i>
-                    <h2 class="font-serif-retro text-2xl md:text-3xl wood-text-dark font-bold">Галерея Polaroid</h2>
+                    <div>
+        <!-- POLAROID PHOTO GALLERY SECTION -->
+        <section class="linen-panel p-6 md:p-10">
+            <div class="flex flex-col sm:flex-row items-center justify-between border-b-2 border-amber-800/30 pb-4 mb-8 gap-4">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-camera-retro text-amber-900 text-3xl"></i>
+                    <div>
+                        <h2 class="font-serif-retro text-2xl md:text-3xl wood-text-dark font-bold">Галерея Polaroid</h2>
+                        <p class="text-xs text-amber-950/80 font-semibold">Нажмите на карточку, чтобы открыть фото в полном размере</p>
+                    </div>
                 </div>
-                <span class="font-handwriting text-2xl text-amber-950 font-bold italic">Моменты и воспоминания 📸</span>
             </div>
 
-            <!-- Polaroid Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 pt-2 pb-4">
-                
-                <!-- Polaroid Item 1 -->
-                <div class="polaroid cursor-pointer" style="--rotation: -2.5deg;" onclick="openLightbox('https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800', 'Праздничное настроение 🎉')">
-                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10">
-                        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500" alt="Праздник" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-amber-200/70 backdrop-blur-sm border border-amber-300/60 rotate-2 shadow-sm"></div>
-                    </div>
-                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight">Счастливые моменты ✨</p>
-                </div>
-
-                <!-- Polaroid Item 2 -->
-                <div class="polaroid cursor-pointer" style="--rotation: 3deg;" onclick="openLightbox('https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800', 'С Днём Рождения, ТаняГА!')">
-                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10">
-                        <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=500" alt="Торт" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-amber-200/70 backdrop-blur-sm border border-amber-300/60 -rotate-3 shadow-sm"></div>
-                    </div>
-                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight">14 Августа 🎂</p>
-                </div>
-
-                <!-- Polaroid Item 3 -->
-                <div class="polaroid cursor-pointer" style="--rotation: -1.8deg;" onclick="openLightbox('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800', 'Виниловый вечер')">
-                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10">
-                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500" alt="Музыка" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105">
-                        <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-red-700 border border-red-900 shadow-md"></div>
-                    </div>
-                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight">В ритме музыки 🎶</p>
-                </div>
-
-                <!-- Polaroid Item 4 -->
-                <div class="polaroid cursor-pointer" style="--rotation: 2.2deg;" onclick="openLightbox('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800', 'Теплые улыбки и радость')">
-                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10">
-                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500" alt="Шары" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-amber-200/70 backdrop-blur-sm border border-amber-300/60 rotate-1 shadow-sm"></div>
-                    </div>
-                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight">Море улыбок 🎈</p>
-                </div>
-
-                <!-- Polaroid Item 5 -->
-                <div class="polaroid cursor-pointer" style="--rotation: -3deg;" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800', 'Летний вечер 14 Августа')">
-                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10">
-                        <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=500" alt="Бокалы" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105">
-                        <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-amber-700 border border-amber-900 shadow-md"></div>
-                    </div>
-                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight">За тебя, ТаняГА! 🥂</p>
-                </div>
-
-                <!-- Polaroid Item 6 -->
-                <div class="polaroid cursor-pointer" style="--rotation: 1.5deg;" onclick="openLightbox('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800', 'Лучшие воспоминания')">
-                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10">
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500" alt="Огни" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-amber-200/70 backdrop-blur-sm border border-amber-300/60 -rotate-2 shadow-sm"></div>
-                    </div>
-                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight">Пусть мечты сбываются 🌟</p>
-                </div>
-
+            <!-- Polaroid Grid Container -->
+            <div id="polaroids-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 pt-2 pb-4">
+                <!-- Dynamic Polaroid Items Rendered via JS -->
             </div>
         </section>
 
@@ -391,19 +331,14 @@
 
                 <p class="text-base sm:text-lg text-amber-950 font-serif-retro mb-4">
                     КОМУ: <strong>ТаняГА</strong><br>
-                    ОТ КОГО: <strong>Друзей и близких</strong>
+                    ОТ КОГО: <strong>Андрюшки</strong>
                 </p>
 
                 <p class="mb-4 text-neutral-800 leading-relaxed font-sans text-base">
-                    Дорогая ТаняГА! От всей души поздравляем тебя с Днём Рождения! Желаем неиссякаемого вдохновения, гармонии, ярких эмоций и отличного настроения. Пусть каждый твой день звучит как любимая пластинка — тепло, душевно и со вкусом! 🎶✨
+                    Дорогая ТаняГА! Взаимопонимания, понимать взаимно
                 </p>
 
-                <div class="pt-4 flex flex-wrap items-center justify-between gap-4 border-t border-amber-800/20">
-                    <button onclick="triggerConfetti()" class="brass-plaque px-6 py-2.5 rounded-md font-serif-retro font-bold text-sm tracking-wider hover:brightness-110 active:scale-95 transition flex items-center gap-2">
-                        <i class="fa-solid fa-champagne-glasses"></i>
-                        <span>Запустить Салют! 🎆</span>
-                    </button>
-                    
+                <div class="pt-4 flex items-center justify-end border-t border-amber-800/20">
                     <span class="font-handwriting text-2xl text-amber-950 font-bold">С любовью и наилучшими пожеланиями!</span>
                 </div>
             </div>
@@ -422,16 +357,16 @@
             <button onclick="closeLightbox()" class="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-amber-900 text-amber-100 font-bold border-2 border-amber-600 hover:bg-amber-800 transition flex items-center justify-center shadow-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="w-full aspect-square sm:aspect-4/3 overflow-hidden rounded bg-black mb-4">
-                <img id="lightbox-img" src="" alt="Enlarged Photo" class="w-full h-full object-contain">
+            <div class="w-full aspect-square sm:aspect-4/3 overflow-hidden rounded bg-black mb-4 flex items-center justify-center">
+                <img id="lightbox-img" src="" alt="Enlarged Photo" class="max-w-full max-h-[70vh] object-contain">
             </div>
-            <p id="lightbox-caption" class="font-handwriting text-3xl text-neutral-800 text-center"></p>
+            <p id="lightbox-caption" class="font-handwriting text-3xl text-neutral-800 text-center px-4"></p>
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        /* PLAYLIST CONFIGURATION WITH EASY MP3 REPLACEMENT */
+        /* PLAYLIST CONFIGURATION */
         const PLAYLIST = [
             {
                 id: 1,
@@ -463,6 +398,35 @@
             }
         ];
 
+        /* POLAROID PHOTO GALLERY DATA WITH TITLES AND DESCRIPTIONS */
+        let POLAROIDS = [
+            {
+                id: 1,
+                url: "https://raw.githubusercontent.com/Andreydr0id/TanyaTest/main/1.jpg",
+                caption: "27.08.24",
+                description: "Сенгилей - это место котрое напрямую ассоциируется с счастьем. Оно останется в нашей памяти навсегда",
+                rotation: -2.5,
+                style: "tape-yellow"
+            },
+            {
+                id: 2,
+                url: "https://raw.githubusercontent.com/Andreydr0id/TanyaTest/main/2.jpg",
+                caption: "01.07.25",
+                description: "<<Лето во дворах>> редко меня радовало, но с тобой оно всегда было интересным",
+                rotation: 3,
+                style: "tape-yellow"
+            },
+            {
+                id: 3,
+                url: "https://raw.githubusercontent.com/Andreydr0id/TanyaTest/main/3.jpg",
+                caption: "24.01.26",
+                description: "Это был уникальный опыт, и вот он пригодился",
+                rotation: -1.8,
+                style: "pin-red"
+            },
+           
+        ];
+
         let currentTrackIndex = 0;
         let isPlaying = false;
         
@@ -482,10 +446,10 @@
         const btnPlayIcon = document.getElementById('btn-play-icon');
         const statusLed = document.getElementById('status-led');
         const statusText = document.getElementById('status-text');
-        const labelTitle = document.getElementById('label-title');
         const labelCoverBg = document.getElementById('label-cover-bg');
         const currentTrackName = document.getElementById('current-track-name');
         const albumsContainer = document.getElementById('albums-container');
+        const polaroidsContainer = document.getElementById('polaroids-container');
 
         // Automatic URL conversion (e.g. GitHub page -> direct raw file)
         function resolveAudioUrl(url) {
@@ -498,6 +462,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             renderAlbums();
+            renderPolaroids();
             loadTrack(0);
 
             // Vinyl click toggle
@@ -514,7 +479,45 @@
             });
         });
 
-        // Render Album Cards Gallery
+        /* RENDER POLAROID GALLERY */
+        function renderPolaroids() {
+            polaroidsContainer.innerHTML = '';
+            
+            POLAROIDS.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = "polaroid group cursor-pointer relative transition-transform duration-300";
+                card.style.setProperty('--rotation', `${item.rotation}deg`);
+                card.onclick = () => {
+                    openLightbox(item.url, item.description || item.caption);
+                };
+
+                // Attachment Style Element (Yellow Tape, Red Pin, Brass Pin)
+                let pinHtml = '';
+                if (item.style === 'pin-red') {
+                    pinHtml = `<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-red-700 border border-red-900 shadow-md z-20"></div>`;
+                } else if (item.style === 'pin-brass') {
+                    pinHtml = `<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-amber-700 border border-amber-900 shadow-md z-20"></div>`;
+                } else {
+                    pinHtml = `<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-amber-200/70 backdrop-blur-sm border border-amber-300/60 rotate-1 shadow-sm z-20"></div>`;
+                }
+
+                card.innerHTML = `
+                    ${pinHtml}
+
+                    <!-- Photo Container -->
+                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10 rounded-sm">
+                        <img src="${item.url}" alt="${item.caption}" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/500x500/f2e7d3/382313?text=Фото'">
+                    </div>
+
+                    <!-- Caption on Card -->
+                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight px-1">${item.caption}</p>
+                `;
+
+                polaroidsContainer.appendChild(card);
+            });
+        }
+
+        /* RENDER ALBUM CARDS GALLERY */
         function renderAlbums() {
             albumsContainer.innerHTML = '';
             PLAYLIST.forEach((track, index) => {
@@ -529,9 +532,7 @@
                 card.onclick = () => selectTrack(index);
 
                 card.innerHTML = `
-                    <!-- Large Vinyl Cover Container -->
                     <div class="relative w-full aspect-square rounded-lg overflow-hidden border-2 ${isSelected ? 'border-amber-300' : 'border-amber-800/40'} shadow-md mb-3 bg-neutral-900 flex items-center justify-center">
-                        <!-- Simulated vinyl record peeking out on hover -->
                         <div class="absolute right-2 w-full h-full rounded-full bg-neutral-900 border-2 border-neutral-700 opacity-40 transform group-hover:translate-x-6 transition-transform duration-300 pointer-events-none flex items-center justify-center">
                             <div class="w-1/3 h-1/3 rounded-full border border-amber-600/50"></div>
                         </div>
@@ -541,7 +542,6 @@
                         </div>
                         ${isSelected ? `<div class="absolute inset-0 bg-amber-900/20 z-10 pointer-events-none border-2 border-amber-400 rounded-lg"></div>` : ''}
                     </div>
-                    <!-- Song Info -->
                     <div class="overflow-hidden flex flex-col justify-between flex-grow">
                         <h4 class="text-base sm:text-lg font-bold truncate ${isSelected ? 'text-amber-100' : 'text-amber-950'}">${track.title}</h4>
                         <p class="text-xs sm:text-sm opacity-80 truncate ${isSelected ? 'text-amber-200' : 'text-amber-900'}">${track.artist}</p>
@@ -560,7 +560,7 @@
             labelCoverBg.style.backgroundImage = `url('${track.cover}')`;
             currentTrackName.textContent = `${track.title} — ${track.artist}`;
 
-            // Update Audio Src (fixing GitHub URL if present)
+            // Update Audio Src
             const directUrl = resolveAudioUrl(track.src);
             audioPlayer.src = directUrl;
 
@@ -621,7 +621,6 @@
                     startRetroMelody();
                 });
             } else {
-                // Placeholder URL (lol.com): play retro musical melody automatically!
                 startRetroMelody();
             }
         }
@@ -721,7 +720,7 @@
                     const gain = audioCtx.createGain();
                     const filter = audioCtx.createBiquadFilter();
 
-                    osc.type = 'triangle'; // Warm vintage synthesizer tone
+                    osc.type = 'triangle';
                     osc.frequency.value = notes[noteIndex % notes.length];
                     noteIndex++;
 
@@ -753,9 +752,9 @@
         }
 
         // Polaroid Lightbox
-        function openLightbox(imgSrc, caption) {
+        function openLightbox(imgSrc, descriptionText) {
             document.getElementById('lightbox-img').src = imgSrc;
-            document.getElementById('lightbox-caption').textContent = caption;
+            document.getElementById('lightbox-caption').textContent = descriptionText;
             document.getElementById('lightbox').classList.remove('hidden');
             document.getElementById('lightbox').classList.add('flex');
         }
