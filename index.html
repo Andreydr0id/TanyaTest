@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Днём Рождения, ТаняГА!</title>
+    <title>С Днём Рождения, ТаняГА! 14 Августа 🎵</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -21,13 +21,11 @@
         .font-garamond { font-family: 'Cormorant Garamond', serif; }
         .font-handwriting { font-family: 'Caveat', cursive; }
 
-        /* Slatted Wood & Linen Fabric Background matching user image */
+        /* Slatted Wood & Linen Fabric Background */
         body {
             background-color: #cbab7d;
             background-image: 
-                /* Subtle ambient dark vignette at borders */
                 radial-gradient(ellipse at center, rgba(255, 248, 235, 0.2) 0%, rgba(94, 61, 28, 0.45) 100%),
-                /* Vertical Slatted Bamboo/Wood Planks pattern */
                 repeating-linear-gradient(
                     90deg,
                     #aa8553 0px,
@@ -37,14 +35,13 @@
                     #be9d6e 27px,
                     #7c5a2e 30px
                 ),
-                /* Fine cross grain overlay */
                 linear-gradient(0deg, rgba(0,0,0,0.06) 50%, rgba(255,255,255,0.06) 50%);
             background-size: 100% 100%, 30px 100%, 100% 4px;
             background-attachment: fixed;
             color: #382313;
         }
 
-        /* Natural Linen / Canvas Fabric Texture Overlay Panel */
+        /* Natural Linen Texture Overlay Panel */
         .linen-panel {
             background-color: #f2e7d3;
             background-image: 
@@ -68,7 +65,7 @@
             border-radius: 16px;
         }
 
-        /* Brass / Bronze Metal Plaque */
+        /* Brass Metal Plaque */
         .brass-plaque {
             background: linear-gradient(135deg, #d4af37 0%, #fff3a8 25%, #aa771c 50%, #f7e68d 75%, #8a5a0c 100%);
             color: #2b1704;
@@ -93,35 +90,61 @@
         }
 
         .spinning {
-            animation: spinRecord 2.2s linear infinite;
+            animation: spinRecord 1.0s linear infinite;
         }
 
         /* Tonearm Movement & Resting Position */
         .tonearm {
             transform-origin: 12px 12px;
-            transform: rotate(-32deg);
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: rotate(-24deg);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .tonearm.playing {
-            transform: rotate(6deg);
-        }
-
-        /* Polaroid Photo Style */
+        /* Standardized Polaroid Style */
         .polaroid {
             background: #fcfbf9;
-            padding: 12px 12px 22px 12px;
+            padding: 12px 12px 16px 12px;
             box-shadow: 0 8px 20px rgba(60, 40, 20, 0.25), 0 2px 5px rgba(0,0,0,0.15);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform: rotate(var(--rotation, 0deg));
             border: 1px solid #e8dec8;
             position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .polaroid:hover {
             transform: scale(1.05) rotate(0deg) !important;
             z-index: 30;
             box-shadow: 0 16px 30px rgba(40, 20, 5, 0.4);
+        }
+
+        /* Ejection Animation for Polaroid Camera */
+        @keyframes ejectPhotoAnimation {
+            0% {
+                transform: translateY(-90%) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .photo-ejecting {
+            animation: ejectPhotoAnimation 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Flash overlay animation */
+        @keyframes cameraFlash {
+            0% { opacity: 0; }
+            20% { opacity: 0.95; }
+            100% { opacity: 0; }
+        }
+        .flash-active {
+            animation: cameraFlash 0.25s ease-out;
         }
 
         /* Brass Screw Component */
@@ -162,6 +185,9 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-amber-700 selection:text-white">
+
+    <!-- Flash overlay element -->
+    <div id="flash-overlay" class="fixed inset-0 bg-white z-50 pointer-events-none opacity-0"></div>
 
     <!-- MAIN CONTAINER -->
     <div class="max-w-6xl mx-auto px-4 py-8 w-full flex-grow flex flex-col gap-10">
@@ -298,13 +324,13 @@
                     <i class="fa-solid fa-camera-retro text-amber-900 text-3xl"></i>
                     <div>
                         <h2 class="font-serif-retro text-2xl md:text-3xl wood-text-dark font-bold">Галерея Polaroid</h2>
-                        <p class="text-xs text-amber-950/80 font-semibold">Нажмите на карточку, чтобы открыть фото в полном размере</p>
+                        <p class="text-xs text-amber-950/80 font-semibold">Нажмите на карточку для просмотра или на фотоаппарат для создания фото!</p>
                     </div>
                 </div>
             </div>
 
             <!-- Polaroid Grid Container -->
-            <div id="polaroids-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 pt-2 pb-4">
+            <div id="polaroids-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 items-stretch pt-2 pb-4">
                 <!-- Dynamic Polaroid Items Rendered via JS -->
             </div>
         </section>
@@ -342,7 +368,7 @@
 
     <!-- FOOTER -->
     <footer class="mt-auto w-full text-center py-6 text-xs text-amber-950/80 font-bold border-t border-amber-800/30 bg-[#ebdcb8] shadow-inner">
-        <p class="font-serif-retro">Праздничный сайт для ТаниГА • 2026</p>
+        <p class="font-serif-retro">Праздничный сайт для ТаниГА • 14 Августа</p>
     </footer>
 
     <!-- LIGHTBOX MODAL -->
@@ -351,7 +377,7 @@
             <button onclick="closeLightbox()" class="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-amber-900 text-amber-100 font-bold border-2 border-amber-600 hover:bg-amber-800 transition flex items-center justify-center shadow-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="w-full aspect-square sm:aspect-4/3 overflow-hidden rounded bg-black mb-4 flex items-center justify-center">
+            <div id="lightbox-img-box" class="w-full aspect-square sm:aspect-4/3 overflow-hidden rounded bg-black mb-4 flex items-center justify-center">
                 <img id="lightbox-img" src="" alt="Enlarged Photo" class="max-w-full max-h-[70vh] object-contain">
             </div>
             <p id="lightbox-caption" class="font-handwriting text-3xl text-neutral-800 text-center px-4"></p>
@@ -392,7 +418,7 @@
             }
         ];
 
-        /* POLAROID PHOTO GALLERY DATA WITH TITLES AND DESCRIPTIONS */
+        /* POLAROID PHOTO GALLERY DATA (FIRST 5 PHOTOS) */
         let POLAROIDS = [
             {
                 id: 1,
@@ -407,7 +433,7 @@
                 url: "https://raw.githubusercontent.com/Andreydr0id/TanyaTest/main/2.jpg",
                 caption: "01.07.25",
                 description: "<<Лето во дворах>> редко меня радовало, но с тобой оно всегда было интересным",
-                rotation: 3,
+                rotation: 2.2,
                 style: "tape-yellow"
             },
             {
@@ -418,11 +444,27 @@
                 rotation: -1.8,
                 style: "pin-red"
             },
-           
+            {
+                id: 4,
+                url: "https://raw.githubusercontent.com/Andreydr0id/TanyaTest/main/4.jpg",
+                caption: "10.03.25",
+                description: "С тобой всегда вайб",
+                rotation: 2.5,
+                style: "tape-yellow"
+            },
+            {
+                id: 5,
+                url: "https://raw.githubusercontent.com/Andreydr0id/TanyaTest/main/5.jpg",
+                caption: "27.12.24",
+                description: "Конечно, ёлки",
+                rotation: -1.5,
+                style: "pin-red"
+            }
         ];
 
         let currentTrackIndex = 0;
         let isPlaying = false;
+        let fadeOutInterval = null;
         
         // Audio Player
         const audioPlayer = new Audio();
@@ -432,6 +474,7 @@
         let crackleNode = null;
         let synthInterval = null;
         let isSynthPlaying = false;
+        let tonearmAnimFrame = null;
 
         // DOM Elements
         const vinylRecord = document.getElementById('vinyl-record');
@@ -445,7 +488,7 @@
         const albumsContainer = document.getElementById('albums-container');
         const polaroidsContainer = document.getElementById('polaroids-container');
 
-        // Automatic URL conversion (e.g. GitHub page -> direct raw file)
+        // Automatic URL conversion
         function resolveAudioUrl(url) {
             if (!url) return '';
             if (url.includes('github.com') && url.includes('/blob/')) {
@@ -459,33 +502,33 @@
             renderPolaroids();
             loadTrack(0);
 
-            // Vinyl click toggle
             vinylRecord.addEventListener('click', () => {
                 togglePlayState();
             });
 
-            // Audio error handling
+            audioPlayer.addEventListener('ended', () => {
+                playNextTrack();
+            });
+
             audioPlayer.addEventListener('error', () => {
-                console.log("Audio file error or CORS restricted. Playing fallback synth melody.");
-                if (isPlaying) {
-                    startRetroMelody();
-                }
+                console.log("Audio file error or CORS restricted.");
+                pauseAudio();
             });
         });
 
-        /* RENDER POLAROID GALLERY */
+        /* RENDER POLAROID GALLERY WITH INTERACTIVE CAMERA IN 6TH SLOT */
         function renderPolaroids() {
             polaroidsContainer.innerHTML = '';
             
+            // Render first 5 photo cards
             POLAROIDS.forEach((item) => {
-                const card = document.createElement('div');
-                card.className = "polaroid group cursor-pointer relative transition-transform duration-300";
-                card.style.setProperty('--rotation', `${item.rotation}deg`);
-                card.onclick = () => {
+                const wrapper = document.createElement('div');
+                wrapper.className = "polaroid group cursor-pointer relative transition-transform duration-300 h-full flex flex-col justify-between";
+                wrapper.style.setProperty('--rotation', `${item.rotation}deg`);
+                wrapper.onclick = () => {
                     openLightbox(item.url, item.description || item.caption);
                 };
 
-                // Attachment Style Element (Yellow Tape, Red Pin, Brass Pin)
                 let pinHtml = '';
                 if (item.style === 'pin-red') {
                     pinHtml = `<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-red-700 border border-red-900 shadow-md z-20"></div>`;
@@ -495,20 +538,149 @@
                     pinHtml = `<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-amber-200/70 backdrop-blur-sm border border-amber-300/60 rotate-1 shadow-sm z-20"></div>`;
                 }
 
-                card.innerHTML = `
+                wrapper.innerHTML = `
                     ${pinHtml}
 
-                    <!-- Photo Container -->
-                    <div class="relative aspect-square overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10 rounded-sm">
+                    <div class="relative aspect-square w-full overflow-hidden mb-3 bg-neutral-200 border border-amber-900/10 rounded-sm shrink-0">
                         <img src="${item.url}" alt="${item.caption}" class="w-full h-full object-cover grayscale-[15%] sepia-[20%] contrast-105 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/500x500/f2e7d3/382313?text=Фото'">
                     </div>
 
-                    <!-- Caption on Card -->
-                    <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight px-1">${item.caption}</p>
+                    <div class="flex-grow flex items-center justify-center pt-1">
+                        <p class="font-handwriting text-2xl text-center text-neutral-800 leading-tight px-1">${item.caption}</p>
+                    </div>
                 `;
 
-                polaroidsContainer.appendChild(card);
+                polaroidsContainer.appendChild(wrapper);
             });
+
+            // 6TH SLOT: INTERACTIVE VINTAGE POLAROID CAMERA
+            const cameraSlot = document.createElement('div');
+            cameraSlot.className = "flex flex-col items-center relative w-full h-full justify-start select-none min-h-[300px]";
+            cameraSlot.innerHTML = `
+                <!-- POLAROID CAMERA BODY -->
+                <div id="polaroid-camera-body" onclick="ejectFuturePhoto()" class="w-full bg-gradient-to-b from-stone-100 via-stone-200 to-stone-300 border-2 border-stone-400 rounded-t-2xl p-4 shadow-xl relative z-20 flex flex-col items-center border-b-0 cursor-pointer group hover:brightness-105 transition active:scale-[0.99]">
+                    
+                    <!-- Camera Top Header Details -->
+                    <div class="w-full flex items-center justify-between mb-2 border-b border-stone-300/80 pb-2">
+                        <div class="flex items-center gap-1.5">
+                            <div class="w-3.5 h-3.5 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.8)] border border-red-800 animate-pulse"></div>
+                            <span class="text-[10px] font-mono font-bold text-stone-700 tracking-wider uppercase">POLAROID</span>
+                        </div>
+                        
+                        <!-- Shutter Button & Flash -->
+                        <div class="flex items-center gap-2">
+                            <div class="px-2 py-0.5 rounded bg-amber-900 text-amber-100 text-[9px] font-bold tracking-wider group-hover:bg-amber-800 transition shadow">
+                                НАЖМИ МЕНЯ 📸
+                            </div>
+                            <div class="w-5 h-5 rounded-md bg-neutral-900 border border-stone-400 flex items-center justify-center shadow-inner">
+                                <div class="w-2.5 h-2.5 rounded-full bg-sky-900 border border-sky-400"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Central Camera Lens -->
+                    <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-b from-stone-800 via-neutral-900 to-black p-2 shadow-xl border-2 border-stone-300 my-1 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                        <div class="w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-neutral-950 border-2 border-stone-600 flex items-center justify-center shadow-inner">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-sky-900 via-blue-950 to-indigo-900 border border-blue-400/50 flex items-center justify-center shadow-inner">
+                                <div class="w-5 h-5 rounded-full bg-black/90 border border-white/20"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rainbow Stripe -->
+                    <div class="w-full h-2.5 mt-2 rounded-sm bg-gradient-to-r from-red-500 via-yellow-400 via-green-500 to-blue-500 shadow-sm"></div>
+                </div>
+
+                <!-- Camera Ejection Slot Bottom Lip -->
+                <div class="w-full h-4 bg-neutral-900 border-x-2 border-b-2 border-stone-500 shadow-xl z-20 rounded-b-lg flex items-center justify-center relative">
+                    <div class="w-4/5 h-1.5 bg-black rounded-full border border-neutral-800"></div>
+                </div>
+
+                <!-- Ejectable Black Future Photo Card -->
+                <div id="future-photo-card" class="w-full max-w-[240px] relative z-10 transition-all duration-700 hidden -mt-2">
+                    <div class="polaroid cursor-pointer" onclick="openFutureLightbox()" style="--rotation: 1.5deg;">
+                        <!-- Solid Black Photo Frame -->
+                        <div class="relative aspect-square w-full overflow-hidden bg-neutral-950 border border-neutral-800 rounded-sm shadow-inner flex flex-col items-center justify-center p-4">
+                            <i class="fa-solid fa-sparkles text-amber-300/80 text-3xl mb-2 animate-pulse"></i>
+                            <p class="text-[11px] font-mono text-amber-200/70 text-center tracking-widest uppercase">✨ Future ✨</p>
+                        </div>
+                        
+                        <!-- Bottom White Margin with Handwriting Caption "Future" -->
+                        <div class="pt-2 pb-1 flex items-center justify-center">
+                            <p class="font-handwriting text-3xl text-center text-neutral-900 font-bold tracking-wide">Future</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            polaroidsContainer.appendChild(cameraSlot);
+        }
+
+        /* EJECT FUTURE PHOTO LOGIC */
+        function ejectFuturePhoto() {
+            const card = document.getElementById('future-photo-card');
+            const flash = document.getElementById('flash-overlay');
+
+            // Trigger flash animation
+            if (flash) {
+                flash.classList.add('flash-active');
+                setTimeout(() => flash.classList.remove('flash-active'), 250);
+            }
+
+            // Camera shutter sound effect
+            playShutterSound();
+
+            if (card) {
+                card.classList.remove('hidden');
+                card.classList.remove('photo-ejecting');
+                // Trigger reflow for animation restart
+                void card.offsetWidth;
+                card.classList.add('photo-ejecting');
+                
+                triggerConfetti();
+            }
+        }
+
+        /* Play synthesized camera shutter click sound */
+        function playShutterSound() {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(450, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.12);
+                
+                gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.12);
+            } catch(e) {}
+        }
+
+        /* Open Lightbox for Future photo */
+        function openFutureLightbox() {
+            const imgBox = document.getElementById('lightbox-img-box');
+            const img = document.getElementById('lightbox-img');
+            
+            img.style.display = 'none';
+            imgBox.className = "w-full aspect-square sm:aspect-4/3 overflow-hidden rounded bg-neutral-950 mb-4 flex flex-col items-center justify-center p-6 border border-neutral-800 shadow-inner";
+            imgBox.innerHTML = `
+                <i class="fa-solid fa-stars text-amber-400 text-5xl mb-4 animate-pulse"></i>
+                <h3 class="font-serif-retro text-3xl text-amber-100 font-bold mb-2">Future</h3>
+                <p class="font-garamond text-amber-200/90 text-lg text-center max-w-md">Наше общее прекрасное будущее, полное ярких моментов, музыки и счастливых дней! ✨</p>
+            `;
+            
+            document.getElementById('lightbox-caption').textContent = "Future";
+            document.getElementById('lightbox').classList.remove('hidden');
+            document.getElementById('lightbox').classList.add('flex');
         }
 
         /* RENDER ALBUM CARDS GALLERY */
@@ -550,15 +722,12 @@
             currentTrackIndex = index;
             const track = PLAYLIST[index];
 
-            // Update Label & UI
             labelCoverBg.style.backgroundImage = `url('${track.cover}')`;
             currentTrackName.textContent = `${track.title} — ${track.artist}`;
 
-            // Update Audio Src
             const directUrl = resolveAudioUrl(track.src);
             audioPlayer.src = directUrl;
 
-            // Update Album Gallery view state
             renderAlbums();
 
             if (isPlaying) {
@@ -587,58 +756,138 @@
         }
 
         function playAudio() {
+            if (fadeOutInterval) {
+                clearInterval(fadeOutInterval);
+                fadeOutInterval = null;
+            }
+            audioPlayer.volume = 1.0;
+            audioPlayer.playbackRate = 1.0;
+
             isPlaying = true;
 
-            // Turntable & Tonearm Animations
+            vinylRecord.style.transition = '';
+            vinylRecord.style.transform = '';
             vinylRecord.classList.add('spinning');
-            tonearm.classList.add('playing');
 
-            // Controls & LED Indicators
             btnPlayText.textContent = 'Пауза';
             btnPlayIcon.className = 'fa-solid fa-pause';
             statusLed.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]';
             statusText.textContent = 'ИГРАЕТ';
 
-            // Start Vinyl Crackle Audio Simulation
             startVinylCrackleSound();
-
-            // Reset retro synth fallback
-            stopRetroMelody();
+            startTonearmAnimation();
 
             const track = PLAYLIST[currentTrackIndex];
             const directUrl = resolveAudioUrl(track.src);
 
-            if (directUrl && !directUrl.includes('lol.com')) {
+            if (directUrl) {
                 audioPlayer.src = directUrl;
                 audioPlayer.play().catch(err => {
-                    console.log("Audio URL error, starting synth fallback melody:", err.message);
-                    startRetroMelody();
+                    console.log("Audio play error:", err.message);
                 });
-            } else {
-                startRetroMelody();
+            }
+        }
+
+        function stopVinylSpinningSmoothly() {
+            try {
+                const style = window.getComputedStyle(vinylRecord);
+                const matrix = new WebKitCSSMatrix(style.transform);
+                const angle = Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
+                const currentAngle = angle < 0 ? angle + 360 : angle;
+
+                vinylRecord.classList.remove('spinning');
+                vinylRecord.style.transform = `rotate(${currentAngle}deg)`;
+                
+                // Force layout reflow
+                void vinylRecord.offsetWidth;
+                
+                // Smooth inertia slowdown over 0.4 seconds
+                vinylRecord.style.transition = 'transform 0.4s cubic-bezier(0.1, 0.7, 0.2, 1)';
+                vinylRecord.style.transform = `rotate(${currentAngle + 60}deg)`;
+            } catch(e) {
+                vinylRecord.classList.remove('spinning');
             }
         }
 
         function pauseAudio() {
+            if (!isPlaying && !fadeOutInterval) return;
             isPlaying = false;
 
-            // Stop animations
-            vinylRecord.classList.remove('spinning');
-            tonearm.classList.remove('playing');
-
-            // Controls & LED
             btnPlayText.textContent = 'Старт';
             btnPlayIcon.className = 'fa-solid fa-play';
             statusLed.className = 'w-2.5 h-2.5 rounded-full bg-red-800 shadow-[0_0_5px_rgba(255,0,0,0.5)]';
             statusText.textContent = 'СТОП';
 
-            // Stop Audio & Vinyl Crackle & Synth Melody
-            audioPlayer.pause();
+            stopTonearmAnimation();
             stopVinylCrackleSound();
-            stopRetroMelody();
+            stopVinylSpinningSmoothly();
+
+            if (fadeOutInterval) clearInterval(fadeOutInterval);
+
+            const initialVolume = audioPlayer.volume || 1.0;
+            const duration = 400; // 0.4 секунды для быстрого затухания
+            const startTime = Date.now();
+
+            fadeOutInterval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                
+                // Плавное снижение громкости без изменения скорости и тембра
+                audioPlayer.volume = Math.max(0, initialVolume * (1 - progress));
+
+                if (progress >= 1) {
+                    clearInterval(fadeOutInterval);
+                    fadeOutInterval = null;
+                    audioPlayer.pause();
+                    audioPlayer.volume = initialVolume;
+                    audioPlayer.playbackRate = 1.0;
+                }
+            }, 20);
         }
 
-        // Web Audio Synthesizer for Vinyl Crackle Effect
+        function playNextTrack() {
+            let nextIndex = (currentTrackIndex + 1) % PLAYLIST.length;
+            loadTrack(nextIndex);
+            playAudio();
+        }
+
+        // Tonearm Dynamic Movement
+        function startTonearmAnimation() {
+            if (tonearmAnimFrame) cancelAnimationFrame(tonearmAnimFrame);
+
+            function updateTonearm() {
+                if (!isPlaying) return;
+
+                let progress = 0;
+                if (audioPlayer.duration && !isNaN(audioPlayer.duration) && audioPlayer.duration > 0) {
+                    progress = audioPlayer.currentTime / audioPlayer.duration;
+                }
+
+                progress = Math.min(Math.max(progress, 0), 1);
+
+                const startAngle = 2;
+                const endAngle = 22;
+                const currentAngle = startAngle + (endAngle - startAngle) * progress;
+
+                tonearm.style.transition = 'transform 0.3s linear';
+                tonearm.style.transform = `rotate(${currentAngle}deg)`;
+
+                tonearmAnimFrame = requestAnimationFrame(updateTonearm);
+            }
+
+            updateTonearm();
+        }
+
+        function stopTonearmAnimation() {
+            if (tonearmAnimFrame) {
+                cancelAnimationFrame(tonearmAnimFrame);
+                tonearmAnimFrame = null;
+            }
+            tonearm.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            tonearm.style.transform = 'rotate(-32deg)';
+        }
+
+        // Web Audio Synthesizer for Vinyl Crackle
         function startVinylCrackleSound() {
             try {
                 if (!audioCtx) {
@@ -687,67 +936,12 @@
             }
         }
 
-        // Web Audio Retro Festive Synth Music Generator (Fallback)
-        function startRetroMelody() {
-            if (isSynthPlaying) return;
-            try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-
-                isSynthPlaying = true;
-                const notes = [
-                    261.63, 261.63, 293.66, 261.63, 349.23, 329.63, // Happy Birthday notes
-                    261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
-                    261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66,
-                    466.16, 466.16, 440.00, 349.23, 392.00, 349.23
-                ];
-                let noteIndex = 0;
-
-                synthInterval = setInterval(() => {
-                    if (!isPlaying || !isSynthPlaying) return;
-
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    const filter = audioCtx.createBiquadFilter();
-
-                    osc.type = 'triangle';
-                    osc.frequency.value = notes[noteIndex % notes.length];
-                    noteIndex++;
-
-                    filter.type = 'lowpass';
-                    filter.frequency.value = 1100;
-
-                    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
-
-                    osc.connect(filter);
-                    filter.connect(gain);
-                    gain.connect(audioCtx.destination);
-
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.5);
-                }, 400);
-
-            } catch (e) {
-                console.log("Synth error:", e);
-            }
-        }
-
-        function stopRetroMelody() {
-            isSynthPlaying = false;
-            if (synthInterval) {
-                clearInterval(synthInterval);
-                synthInterval = null;
-            }
-        }
-
-        // Polaroid Lightbox
+        // Standard Lightbox Open
         function openLightbox(imgSrc, descriptionText) {
-            document.getElementById('lightbox-img').src = imgSrc;
+            const imgBox = document.getElementById('lightbox-img-box');
+            imgBox.className = "w-full aspect-square sm:aspect-4/3 overflow-hidden rounded bg-black mb-4 flex items-center justify-center";
+            imgBox.innerHTML = `<img id="lightbox-img" src="${imgSrc}" alt="Enlarged Photo" class="max-w-full max-h-[70vh] object-contain">`;
+            
             document.getElementById('lightbox-caption').textContent = descriptionText;
             document.getElementById('lightbox').classList.remove('hidden');
             document.getElementById('lightbox').classList.add('flex');
